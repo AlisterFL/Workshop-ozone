@@ -1,0 +1,47 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: black;
+
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+header{
+  width: 100%;
+  background-color: rgb(222, 221, 221);
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar a{
+  padding-left: 20px;
+}
+footer{
+  background-color: rgb(222, 221, 221);
+}
+
+.colorChoice{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.color-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  transition: border 0.3s;
+}
+
+.selected-color {
+  border: 3px solid black;
+}
