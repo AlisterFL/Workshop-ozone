@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import useFetchTypes from '../../hooks/useFetchTypes';
 
+
 function TrashForm() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [mapPosition, setMapPosition] = useState({ lat: 50.641830, lng: 3.061858 }); // Coordonnées initiales
+  // Utilisation du hook useFetchTypes
   const { data: types, isLoading } = useFetchTypes();
 
-  console.log(types);
 
 
 
@@ -21,7 +22,7 @@ function TrashForm() {
     // Créez un WasteFormData pour faciliter l'envoi d'un fichier image
     const trashFormData = new FormData();
     trashFormData.append('name', name);
-    trashFormData.append('selectedOptions', JSON.stringify(selectedOptions));
+    trashFormData.append('type', JSON.stringify(selectedOptions));
     trashFormData.append('location', JSON.stringify(mapPosition));
 
     // Simule l'envoi du formulaire
@@ -85,11 +86,11 @@ function TrashForm() {
                 <p>
                     <label htmlFor="type">Sélectionnez le type de déchet :</label>
                     <select multiple name="dwarfs" id="type" onChange={handleSelectionChange}>
-                        {types.map((type, index) => (
-                            <option key={index} value={type}>
-                                {type}
-                            </option>
-                        ))}
+                    {types.map(({ id, type }) => (
+                    <option key={id} value={id}>
+                        {type}
+                    </option>
+                    ))}
                     </select>
                 </p>
             </div>

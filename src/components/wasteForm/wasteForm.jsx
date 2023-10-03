@@ -18,13 +18,15 @@ function WasteForm() {
 
     // Créez un WasteFormData pour faciliter l'envoi d'un fichier image
     const wasteFormData = new FormData();
-    wasteFormData.append('name', name);
+    wasteFormData.append('titre', name);
     wasteFormData.append('description', description);
-    wasteFormData.append('image', image);
-    wasteFormData.append('selectedOptions', JSON.stringify(selectedOptions));
+    // wasteFormData.append('image', image);
+    wasteFormData.append('type', JSON.stringify(selectedOptions));
+    wasteFormData.append('scoreDeRecyclabilite', 100);
+    
 
     // Simule l'envoi du formulaire
-    console.log("Formulaire soumis !", { name, description, image, selectedOptions});
+    console.log("Formulaire soumis !", { name, description, selectedOptions});
 
     // Pour envoyer réellement le formulaire à un serveur :
     // fetch('/votre-url-api', {
@@ -38,8 +40,8 @@ function WasteForm() {
   };
 
   const handleSelectionChange = (e) => {
-    const selectedValues = Array.from(e.target.selectedOptions, option => option.value);
-    setSelectedOptions(selectedValues);
+    const selectedIds = Array.from(e.target.selectedOptions, option => option.value);
+    setSelectedOptions(selectedIds);
 };
 
 const [imagePreview, setImagePreview] = useState(null);
@@ -56,12 +58,6 @@ const handleImageChange = (e) => {
     }
   };
 
-  
-  
-
-  const [options, setOptions] = useState([
-    'Plastique', 'Verre', 'Déchet Vert', 'Batterie', 'Encombrant'
-  ]);
 
 
   const handleImageDelete = () => {
@@ -101,12 +97,13 @@ const handleImageChange = (e) => {
             <p>
                 <label htmlFor="type">Sélectionnez le type de déchet :</label>
                 <select multiple name="dwarfs" id="type" onChange={handleSelectionChange}>
-                {!isLoading && types.map(type => (
-                    <option key={type} value={type}>
-                    {type}
-                    </option>
-                ))}
+                    {!isLoading && types.map(({ id, type }) => (
+                        <option key={id} value={id}>
+                            {type}
+                        </option>
+                    ))}
                 </select>
+
             </p>
         </div>
       {/* Ajouter une image */}

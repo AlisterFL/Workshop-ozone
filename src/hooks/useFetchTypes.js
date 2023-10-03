@@ -13,7 +13,7 @@ function useFetchTypes() {
                 return response.json();
             })
             .then(data => {
-                const types = data.map(item => item.type);
+                const types = data.map(item => ({ id: item.id, type: item.type }));
                 setData(types);
                 setIsLoading(false);
             })
