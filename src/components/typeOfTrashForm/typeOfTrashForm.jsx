@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function SimpleForm() {
   const [type, setType] = useState('');
@@ -10,14 +10,37 @@ function SimpleForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simule l'envoi du formulaire
-    console.log("Formulaire soumis !", { type, detail, color });
+    const formData = {
+        type,
+        detail,
+        color
+    };
 
-    // Reset les champs
-    setType('');
-    setDetail('');
-    setColor('');
-  };
+    fetch('http://192.168.210.137:8842/api/v1/tags', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de l\'envoi des données');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Données envoyées avec succès:', data);
+        
+        // Reset les champs
+        setType('');
+        setDetail('');
+        setColor('');
+    })
+    .catch(error => {
+        console.error('Il y a eu un problème avec l\'opération fetch:', error.message);
+    });
+};
 
   return (
     <div className="simpleForm">

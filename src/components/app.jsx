@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 
 import Header from './header/header';
+import NavBar from './navbar/navbar';
 import Footer from './footer/footer';
 import Error from './error/error';
 import AddType from './typeOfTrashForm/typeOfTrashForm';
@@ -19,11 +20,14 @@ function App() {
 
   <Router>
     <Header />
+    <NavBar />
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/list" element={<List />} />
       <Route path="/addToList" element={<AddToList />} />
+      <Route path="/addTo" element={<AddToList />} />
+      <Route path="/addTrash" element={<AddToList />} />
       <Route path="/addType" element={<AddType />} />
       <Route path="*" element={<Error />} />
     </Routes>

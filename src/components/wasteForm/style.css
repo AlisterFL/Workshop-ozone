@@ -1,4 +1,4 @@
-.wasteForm, .trashForm{
+.formContainer {
     font-family: 'Arial', sans-serif;
     max-width: 600px;
     margin: 50px auto;
@@ -8,8 +8,6 @@
     background-color: #f9f9f9;
 }
 
-
-
 h2 {
     text-align: center;
     color: #333;
@@ -18,10 +16,6 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-}
-
-div {
-    margin: 20px 0;
 }
 
 label {
@@ -63,19 +57,18 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
-
-.buttonImageRemove{
-    position: 'absolute';
-        top: '10px';
-        right: '10px',;
-        background: 'red'; 
-        color: 'white'; 
-        border: 'none';
-        border-radius: 50% ;
-        cursor: 'pointer'
+.buttonImageRemove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-textarea{
+textarea {
     resize: none;
     width: 95%;
 }

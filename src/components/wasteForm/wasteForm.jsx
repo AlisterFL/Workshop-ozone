@@ -6,11 +6,12 @@ import useFetchTypes from '../../hooks/useFetchTypes';
 function WasteForm() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
-  const imageInputRef = useRef(null);
   const [selectedOptions, setSelectedOptions] = useState([]);
   // Utilisation du hook useFetchTypes
   const { data: types, isLoading } = useFetchTypes();
+  
+  //   const imageInputRef = useRef(null);
+  //   const [image, setImage] = useState(null);
 
 
   const handleSubmit = (e) => {
@@ -36,7 +37,7 @@ function WasteForm() {
 
     setName('');
     setDescription('');
-    setImage(null);
+    // setImage(null);
   };
 
   const handleSelectionChange = (e) => {
@@ -44,36 +45,41 @@ function WasteForm() {
     setSelectedOptions(selectedIds);
 };
 
-const [imagePreview, setImagePreview] = useState(null);
+//image
+// const [imagePreview, setImagePreview] = useState(null);
 
 
-const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+// const handleImageChange = (e) => {
+//     setImage(e.target.files[0]);
     
-    // Créer une URL temporaire à partir du fichier sélectionné
-    const file = e.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setImagePreview(url);
-    }
-  };
+//     // Créer une URL temporaire à partir du fichier sélectionné
+//     const file = e.target.files[0];
+//     if (file) {
+//       const url = URL.createObjectURL(file);
+//       setImagePreview(url);
+//     }
+//   };
 
-
-
-  const handleImageDelete = () => {
-    setImage(null);
-    setImagePreview(null);
-    if (imageInputRef.current) {
-      imageInputRef.current.value = '';  // Réinitialise l'input de type "file"
-    }
-  };
+//   const handleImageDelete = () => {
+//     setImage(null);
+//     setImagePreview(null);
+//     if (imageInputRef.current) {
+//       imageInputRef.current.value = '';  // Réinitialise l'input de type "file"
+//     }
+//   };
   
   
 
   return (
-    <div className="wasteForm">
-        <h2>Ajouter un nouveau déchet</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="formContainer">
+        {isLoading ? (
+                <div className="loading">
+
+                    <h2>Ajouter un nouveau dechet</h2>
+                    <p>Chargement du formulaire...</p>
+                </div>
+            ) : (
+            <form onSubmit={handleSubmit}>
         <div>
             <label htmlFor="name">Nom :</label>
             <input 
@@ -107,7 +113,7 @@ const handleImageChange = (e) => {
             </p>
         </div>
       {/* Ajouter une image */}
-        <div>
+        {/* <div>
             <label htmlFor="image">Image :</label>
             <input 
             type="file" 
@@ -124,11 +130,12 @@ const handleImageChange = (e) => {
                 Supprimer l'image
             </button>
         </div>
-)}
+)} */}
 
 
         <button type="submit">Soumettre</button>
         </form>
+            )}
 
     </div>
   );
